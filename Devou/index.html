@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>game</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+<!-- 	<script src="./js/control.js"></script> -->
+	<script src="./js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+	<div id="interface">
+		<img id="opening" style="display: inline;" src="./css/img/opening.png">
+		<img id="teachingpage"  style="display: none;" src="./css/img/teachingpage.png">
+		<div id="Level1_Background" style="display: none;">
+			<div id="Level1_energybar"></div>
+			<div id="character"></div>
+			<div id="floor1"></div>
+			<div id="floor2"></div>
+			<div id="floor3"></div>
+			<div id="Level1_food_A"></div>
+			<div id="Level1_food_B"></div>
+			<div id="Level1_food_C"></div>
+		</div>	
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	function eat(){//判断吃食物
+	var x = $("#character").css("left").substring(0,$("#character").css("left").length-2);
+	var y = $("#character").css("bottom").substring(0,$("#character").css("bottom").length-2);
+	// console.log(x+','+y);
+	if ($('#Level1_food_A').css("display")=="none"&&$('#Level1_food_B').css("display")=="none"&&$('#Level1_food_C').css("display")=="none") {//先判断本关游戏是否已经结束，再判断寻找食物顺序
+		alert("恭喜你通过第一关！");
+	}else{
+		if(x>=400&&x<=450&&y>=198&&y<=208){
+		$('#Level1_food_A').hide();
+		$('#Level1_energybar').css('background','url(./css/img/Level1_energybar/Level1_energybar_1.png)');
+	}
+	if (x>=630&&x<=680&&y>=350&&y<=360) {
+		$('#Level1_food_B').hide();
+		if ($('#Level1_food_A').css("display")=="block") {
+			ini();
+		}else{
+			$('#Level1_energybar').css('background','url(./css/img/Level1_energybar/Level1_energybar_2.png)');
+		}
+	}
+	if (x>=620&&x<=660&&y>=20&&y<=30) {
+		$('#Level1_food_C').hide();
+		if ($('#Level1_food_A').css("display")=="block"||$('#Level1_food_B').css("display")=="block") {
+			ini();
+		}else{
+			$('#Level1_energybar').css('background','url(./css/img/Level1_energybar/Level1_energybar_3.png)');
+			alert("恭喜你通过第一关！");
+		}
+	}
+	}
+	
+}
+function ini(){//吃错食物顺序重置
+	alert("请按照右上角食物顺序依次寻找食物！");
+	$('#Level1_food_A').show();
+	$('#Level1_food_B').show();
+	$('#Level1_food_C').show();
+	$('#Level1_energybar').css('background','url(./css/img/Level1_energybar/Level1_energybar_0.png)');
+}
+$(function(){
+	var opening;
+	var teachingpage;
+	var Level1_Background;
+       $(document).keypress(function (e) {//游戏界面切换，监听空格键事件
+       	// console.log(e.keyCode);
+       	opening= $('#opening').css("display");
+	    teachingpage = $('#teachingpage').css("display");
+	    Level1_Background = $('#Level1_Background').css("display");
+	    // console.log(opening+''+teachingpage+''+Level1_Background);
+       	if (opening=="inline" &&teachingpage=="none"&& Level1_Background=="none") {
+       		if (e.keyCode == 32){
+                $('#teachingpage').show();
+                $('#opening').hide();
+                $('#Level1_Background').hide();
+         }
+       	}
+       	if (opening=="none" &&teachingpage=="inline"&& Level1_Background=="none") {
+       		if (e.keyCode == 32){
+                $('#teachingpage').hide();
+                $('#opening').hide();
+                $('#Level1_Background').show();
+         }
+       	}
+      })
+       var x = $("#character").css("left").substring(0,$("#character").css("left").length-2);//通过相对定位获取角色坐标
+       var y = $("#character").css("bottom").substring(0,$("#character").css("bottom").length-2);
+       setInterval(down,1);//定时器控制下落
+       setInterval(mouse,500);//定时器实现动态老鼠
+       function down(){//下落方法
+       	   var x = $("#character").css("left").substring(0,$("#character").css("left").length-2);
+           var y = $("#character").css("bottom").substring(0,$("#character").css("bottom").length-2);
+       	   if ($('#Level1_Background').css("display")=="inline"||$('#Level1_Background').css("display")=="block") {
+       	   	if (y>20&&y<493) {
+       	   		// console.log(x+','+y);
+       	   		if(x>=200&&x<=300&&y==133){//第一台阶
+
+       	   		}else if (x>=320&&x<=800&&y==198){//第二台阶
+       	   			
+       	   		}else if (x>=440&&x<=800&&y==352) {//第三台阶
+
+       	   		}else{
+       	   			y--;
+       	   			$("#character").css("bottom",y);
+       	   			eat();
+       	   		}
+       	   	}
+       	   }
+       	   // console.log($("#character").css("bottom"));
+       }
+       function mouse(){//动态老鼠
+       	// console.log(Math.round(Math.random()*3));
+       	var random = Math.round(Math.random()*2)+1;
+       	var url = 'url(./css/img/Level1/Level1_food_C_'+random+'.png)';
+       		$('#Level1_food_C').css('background',url);
+       }
+document.onkeydown=function(e){//监听方向键
+	e=window.event||e;
+	switch(e.keyCode){
+	case 37: //左键
+	// console.log(37);
+	control(37);
+	break;
+	case 38: //向上键
+	// console.log(38);
+	control(38);
+	break;
+	case 39: //右键
+	// console.log(39);
+	control(39);
+	break;
+	// case 40: //向下键
+	// console.log(40);
+	// break;
+	default:
+	break;
+}
+
+function control(order){//控制移动
+	var x = $("#character").css("left").substring(0,$("#character").css("left").length-2);
+	var y = $("#character").css("bottom").substring(0,$("#character").css("bottom").length-2);
+	if (x>=0&&y<=754) {//判断是否超出可移动范围
+		if (order==37&&x>0) {//不能越过左边界
+			x=parseInt(x)-20;
+			$("#character").css("left",x);
+			$('#character').css('background','url(./css/img/Ax_l.png) no-repeat');
+			$('#character').css('background-size','100% 100%');
+		}
+		if (order==39&&x<780) {//不能越过右边界
+			x=parseInt(x)+20;
+			$("#character").css("left",x);
+			$('#character').css('background','url(./css/img/Ax_r.png) no-repeat');
+			$('#character').css('background-size','100% 100%');
+		}
+		if (order==38) {//如果跳，需先判断角色是否已落地，防止空中多段跳BUG
+			if(y==20){//地面
+				y=parseInt(y)+170;
+			// console.log(y);
+			$("#character").css("bottom",y);
+			}else if(x>=200&&x<=300&&y==133){//第一台阶
+					y=parseInt(y)+170;
+					// console.log(y);
+					$("#character").css("bottom",y);
+       	   		}else if (x>=320&&x<=800&&y==198){//第二台阶
+       	   			y=parseInt(y)+170;
+					// console.log(y);
+					$("#character").css("bottom",y);
+       	   		}else if (x>=440&&x<=800&&y==352) {//第三台阶
+       	   			if (parseInt(y)+170>=493) {//防止跳出游戏界面外
+       	   				y=parseInt(y)+75;
+       	   			}else{
+       	   				y=parseInt(y)+170;
+       	   			}
+					console.log(y);
+					$("#character").css("bottom",y);
+       	   		}
+		}
+       	   	}
+       	   	eat();
+}
+}
+  });
+</script>

@@ -1,0 +1,80 @@
+
+#interface {
+	width: 852px;
+	height: 493px;
+}
+
+#opening{
+	width: 100%;
+	height: 100%;
+	/*background: url(../css/img/opening.png);*/
+}
+
+#teachingpage{
+	width: 100%;
+	height: 100%;
+}
+
+#Level1_Background{
+	width: 100%;
+	height: 100%;
+	background: url("../css/img/Level1_Background.png") ;
+	position:relative;
+}
+
+#Level1_energybar{
+	width: 324px; 
+	height: 91px; 
+	float: right;
+	z-index: 99;
+	background: url("../css/img/Level1_energybar/Level1_energybar_0.png") 
+}
+
+#character {
+	width: 66px;
+	height: 66px;
+/*	border:1px solid red;*/
+	position:absolute;left:0;bottom:20px;
+	background: url(../css/img/Ax_r.png) ;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+#floor1{
+	width: 86px;
+	height: 1px;
+/*	border:1px solid red;*/
+	position:absolute;left:241px;bottom:133px;
+}
+#floor2{
+	width: 495px;
+	height: 1px;
+	/*border:1px solid red;*/
+	position:absolute;left:355px;bottom:198px;
+}
+#floor3{
+	width: 380px;
+	height: 1px;
+/*	border:1px solid red;*/
+	position:absolute;left:470px;bottom:352px;
+}
+
+#Level1_food_A{
+	width: 40px;
+	height: 35px;
+	background: url(../css/img/Level1/Level1_food_A.png);
+	position:absolute;left:440px;bottom:203px;
+}
+
+#Level1_food_B{
+	width: 67px;
+	height: 51px;
+	background: url(../css/img/Level1/Level1_food_B.png);
+	position:absolute;left:660px;bottom:349px;
+}
+
+#Level1_food_C{
+	width: 58px;
+	height: 33px;
+	background: url(../css/img/Level1/Level1_food_C_1.png);
+	position:absolute;left:648px;bottom:20px;
+}
