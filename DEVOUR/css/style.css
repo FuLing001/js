@@ -1,0 +1,248 @@
+
+#interface {
+	width: 852px;
+	height: 493px;
+}
+
+#opening{
+	width: 100%;
+	height: 100%;
+/*	background: url(../css/img/opening.png);*/
+}
+#gameending{
+	width: 100%;
+	height: 100%;
+/*	background: url(../css/img/gameending.png);*/
+}
+#deadending{
+	width: 100%;
+	height: 100%;
+/*	background: url(../css/img/deadending.png);*/
+}
+#teachingpage{
+	width: 100%;
+	height: 100%;
+}
+
+#Level1_Background{
+	width: 100%;
+	height: 100%;
+	background: url("../css/img/Level1/Level1_Background.png") ;
+	position:relative;
+}
+
+#Level1_energybar{
+	width: 324px; 
+	height: 91px; 
+	float: right;
+	z-index: 99;
+	background: url("../css/img/Level1_energybar/Level1_energybar_0.png") 
+}
+
+#character1 {
+	width: 106px;
+	height: 66px;
+/*	border:1px solid red;*/
+	position:absolute;left:0;bottom:20px;
+	/*background: url(../css/img/Ax_r.png) ;*/
+	background: url(../css/img/character_Ax/Ax_walk_r.png);
+	/*background-size: 100% 100%;*/
+	background-repeat: no-repeat;
+	background-position: 0% 0%;  
+	/*0 23 44 65 86 107*/
+}
+#lv1_floor1{
+	width: 86px;
+	height: 1px;
+/*	border:1px solid red;*/
+	position:absolute;left:241px;bottom:133px;
+}
+#lv1_floor2{
+	width: 495px;
+	height: 1px;
+	/*border:1px solid red;*/
+	position:absolute;left:355px;bottom:198px;
+}
+#lv1_floor3{
+	width: 380px;
+	height: 1px;
+/*	border:1px solid red;*/
+	position:absolute;left:470px;bottom:352px;
+}
+
+#Level1_food_A{
+	width: 40px;
+	height: 35px;
+	background: url(../css/img/Level1/Level1_food_A.png);
+	position:absolute;left:440px;bottom:203px;
+}
+
+#Level1_food_B{
+	width: 67px;
+	height: 51px;
+	background: url(../css/img/Level1/Level1_food_B.png);
+	position:absolute;left:660px;bottom:349px;
+}
+
+#Level1_food_C{
+	width: 58px;
+	height: 33px;
+	background: url(../css/img/Level1/Level1_food_C_1.png);
+	position:absolute;left:648px;bottom:20px;
+}
+/*第二关*/
+
+#Level2_Background{
+	width: 100%;
+	height: 100%;
+	background: url("../css/img/Level2/Level2_Background.png") ;
+	position:relative;
+}
+
+#Level2_energybar{
+	width: 324px; 
+	height: 91px; 
+	float: right;
+	z-index: 99;
+	background: url("../css/img/Level2_energybar/Level2_energybar_0.png") 
+}
+
+#character2 {
+	width: 106px;
+	height: 66px;
+/*	border:1px solid red;*/
+	position:absolute;left:0;bottom:20px;
+	/*background: url(../css/img/Ax_r.png) ;*/
+	background: url(../css/img/character_Ax/Ax_walk_r.png);
+	/*background-size: 100% 100%;*/
+	background-repeat: no-repeat;
+	background-position: 0% 0%;  
+	/*0 23 44 65 86 107*/
+}
+#lv2_floor1{
+	width: 115px;
+	height: 1px;
+	/*border:1px solid red;*/
+	position:absolute;left:20px;bottom:145px;
+}
+#lv2_floor2{
+	width: 470px;
+	height: 1px;
+	/*border:1px solid red;*/
+	position:absolute;left:190px;bottom:153px;
+}
+#lv2_floor3{
+	width: 115px;
+	height: 1px;
+	/*border:1px solid red;*/
+	position:absolute;left:715px;bottom:145px;
+}
+#Level2_food_A{
+	width: 102px;
+	height: 51px;
+	background: url(../css/img/Level2/Level2_food_A.png);
+	position:absolute;left:630px;bottom:15px;
+}
+
+#Level2_food_B{
+	width: 194px;
+	height: 70px;
+	background: url(../css/img/Level2/Level2_food_B.png);
+	position:absolute;left:420px;bottom:146px;
+}
+
+#Level2_food_C{
+	width: 198px;
+	height: 83px;
+	background: url(../css/img/Level2/Level2_food_C.png);
+	position:absolute;left:236px;bottom:147px;
+}
+
+/*第三关*/
+
+#Level3_Background{
+	width: 100%;
+	height: 100%;
+	background: url("../css/img/Level3/Level3_Background.png") ;
+	position:relative;
+}
+
+#Level3_energybar{
+	width: 324px; 
+	height: 91px; 
+	float: right;
+	z-index: 99;
+	background: url("../css/img/Level3_energybar/Level3_energybar_0.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+#character3 {
+	width: 106px;
+	height: 66px;
+/*	border:1px solid red;*/
+	position:absolute;left:0;bottom:20px;
+	/*background: url(../css/img/Ax_r.png) ;*/
+	background: url(../css/img/character_Ax/Ax_walk_r.png);
+	/*background-size: 100% 100%;*/
+	background-repeat: no-repeat;
+	background-position: 0% 0%;  
+	/*0 23 44 65 86 107*/
+}
+#lv3_floor1{
+	width: 108px;
+	height: 1px;
+	/*border:1px solid red;*/
+	position:absolute;left:248px;bottom:136px;
+}
+#lv3_floor2{
+	width: 130px;
+	height: 1px;
+	/*border:1px solid red;*/
+	position:absolute;left:358px;bottom:246px;
+}
+#lv3_floor3{
+	width: 185px;
+	height: 1px;
+	/*border:1px solid red;*/
+	position:absolute;left:423px;bottom:358px;
+}
+#lv3_floor4{
+	width: 213px;
+	height: 1px;
+	/*border:1px solid red;*/
+	position:absolute;left:635px;bottom:288px;
+}
+#Level3_food_A{
+	width: 123px;
+	height: 35px;
+	background: url(../css/img/Level3/Level3_food_A.png);
+	position:absolute;left:600px;bottom:15px;
+}
+
+#Level3_food_B{
+	width: 123px;
+	height: 35px;
+	background: url(../css/img/Level3/Level3_food_B.png);
+	position:absolute;left:340px;bottom:15px;
+}
+
+#Level3_food_C{
+	width: 52px;
+	height: 36px;
+	background: url(../css/img/Level3/Level3_food_C.png);
+	position:absolute;left:470px;bottom:15px;
+}
+
+#Level3_food_D{
+	width: 52px;
+	height: 36px;
+	background: url(../css/img/Level3/Level3_food_D.png);
+	position:absolute;left:735px;bottom:15px;
+}
+
+#Level3_food_E{
+	width: 145px;
+	height: 59px;
+	background: url(../css/img/Level3/Level3_food_E.png);
+	position:absolute;left:500px;bottom:350px;
+}

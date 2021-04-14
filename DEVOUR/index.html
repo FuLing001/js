@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>game</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+<!-- 	<script src="./js/control.js"></script> -->
+	<script src="./js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+	<div id="interface">
+		<img id="opening" style="display: inline;" src="./css/img/opening.png">
+		<img id="teachingpage"  style="display: none;" src="./css/img/teachingpage.png">
+		<img id="deadending"  style="display: none;" src="./css/img/deadending.png">
+		<img id="gameending"  style="display: none;" src="./css/img/gameending.png">
+		<div id="Level1_Background" style="display: none;">
+			<div id="Level1_energybar"></div>
+			<div id="character1"></div>
+			<div id="lv1_floor1"></div>
+			<div id="lv1_floor2"></div>
+			<div id="lv1_floor3"></div>
+			<div id="Level1_food_A"></div>
+			<div id="Level1_food_B"></div>
+			<div id="Level1_food_C"></div>
+		</div>	
+		<div id="Level2_Background" style="display: none;">
+			<div id="Level2_energybar"></div>
+			<div id="character2"></div>
+			<div id="lv2_floor1"></div>
+			<div id="lv2_floor2"></div>
+			<div id="lv2_floor3"></div>
+			<div id="Level2_food_A"></div>
+			<div id="Level2_food_B"></div>
+			<div id="Level2_food_C"></div>
+		</div>
+		<div id="Level3_Background" style="display: none;">
+			<div id="Level3_energybar"></div>
+			<div id="character3"></div>
+			<div id="lv3_floor1"></div>
+			<div id="lv3_floor2"></div>
+			<div id="lv3_floor3"></div>
+			<div id="lv3_floor4"></div>
+			<div id="Level3_food_A"></div>
+			<div id="Level3_food_B"></div>
+			<div id="Level3_food_C"></div>
+			<div id="Level3_food_D"></div>
+			<div id="Level3_food_E"></div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">
+	function eat(level,x,y){//判断吃食物
+	// var x = $("#character1").css("left").substring(0,$("#character1").css("left").length-2);
+	// var y = $("#character1").css("bottom").substring(0,$("#character1").css("bottom").length-2);
+	// console.log(x+','+y);
+	if(level==1){
+		if ($('#Level1_food_A').css("display")=="none"&&$('#Level1_food_B').css("display")=="none"&&$('#Level1_food_C').css("display")=="none") {//先判断本关游戏是否已经结束，再判断寻找食物顺序
+		$('#teachingpage').hide();
+        $('#opening').hide();
+        $('#Level1_Background').hide();
+        $('#Level2_Background').show();
+	}else{
+		if(x>=400&&x<=450&&y>=198&&y<=208&&$('#Level1_food_A').css("display")=="block"){
+		$('#Level1_food_A').hide();
+		$('#Level1_energybar').css('background','url(./css/img/Level1_energybar/Level1_energybar_1.png)');
+	}
+	if (x>=630&&x<=680&&y>=350&&y<=360&&$('#Level1_food_B').css("display")=="block") {
+		$('#Level1_food_B').hide();
+		if ($('#Level1_food_A').css("display")=="block") {
+			ini(level);
+		}else{
+			$('#Level1_energybar').css('background','url(./css/img/Level1_energybar/Level1_energybar_2.png)');
+		}
+	}
+	if (x>=620&&x<=660&&y>=20&&y<=30&&$('#Level1_food_C').css("display")=="block") {
+		$('#Level1_food_C').hide();
+		if ($('#Level1_food_A').css("display")=="block"||$('#Level1_food_B').css("display")=="block") {
+			ini(level);
+		}else{
+			$('#Level1_energybar').css('background','url(./css/img/Level1_energybar/Level1_energybar_3.png)');
+			$('#teachingpage').hide();
+        	$('#opening').hide();
+        	$('#Level1_Background').hide();
+       		$('#Level2_Background').show();
+		}
+	}
+	}
+	}
+	if (level==2) {
+		if ($('#Level2_food_A').css("display")=="none"&&$('#Level2_food_B').css("display")=="none"&&$('#Level2_food_C').css("display")=="none") {//先判断本关游戏是否已经结束，再判断寻找食物顺序
+		// alert("恭喜你通过第一关！");
+		$('#teachingpage').hide();
+        $('#opening').hide();
+        $('#Level1_Background').hide();
+        $('#Level2_Background').hide();
+        $('#Level3_Background').hide();
+	}else{
+		if(x>=620&&x<=660&&y>=20&&y<=30&&$('#Level2_food_A').css("display")=="block"){
+		$('#Level2_food_A').hide();
+		$('#Level2_energybar').css('background','url(./css/img/Level2_energybar/Level2_energybar_1.png)');
+	}
+	if (x>=480&&x<=520&&y>=153&&y<=173) {
+		// $('#Level2_food_B').hide();
+		if ($('#Level2_food_A').css("display")=="block"&&$('#Level2_energybar').hasClass("active")) {
+			$('#Level2_energybar').removeClass("active");
+			ini(level);
+		}else{
+			$('#Level2_energybar').css('background','url(./css/img/Level2_energybar/Level2_energybar_2.png)');
+			$('#Level2_energybar').addClass("active");//用类名active标识该物品已本找到
+		}
+	}
+	if (x>=280&&x<=320&&y>=153&&y<=173) {
+		// $('#Level1_food_C').hide();
+		if ($('#Level2_food_A').css("display")=="block"||!$('#Level2_energybar').hasClass("active")) {
+			ini(level);
+		}else{
+			$('#Level2_energybar').css('background','url(./css/img/Level2_energybar/Level2_energybar_3.png)');
+			$('#Level2_energybar').removeClass("active");
+			$('#teachingpage').hide();
+		    $('#opening').hide();
+		    $('#Level1_Background').hide();
+		    $('#Level2_Background').hide();
+		    $('#Level3_Background').show();
+		}
+	}
+	}
+
+	}
+	if (level==3) {
+		if ($('#Level3_food_A').css("display")=="none"&&$('#Level3_food_B').css("display")=="none"&&$('#Level3_food_C').css("display")=="none"&&$('#Level3_food_D').css("display")=="none"&&$('#Level3_food_E').css("display")=="none") {//先判断本关游戏是否已经结束，再判断寻找食物顺序
+		// alert("恭喜你通过第一关！");
+		$('#teachingpage').hide();
+        $('#opening').hide();
+        $('#Level1_Background').hide();
+        $('#Level2_Background').hide();
+        $('#Level3_Background').hide();
+        $('#gameending').show();
+	}else{
+		if(x>=580&&x<=660&&y>=20&&y<=30&&$('#Level3_food_A').css("display")=="block"){
+		$('#Level3_food_A').hide();
+		if ($('#Level3_food_B').css("display")=="none"&&$('#Level3_food_A').css("display")=="none") {
+			$('#Level3_energybar').css('background','url(./css/img/Level3_energybar/Level3_energybar_1.png)');
+		}
+	}
+	if (x>=340&&x<=380&&y>=20&&y<=30&&$('#Level3_food_B').css("display")=="block") {
+		$('#Level3_food_B').hide();
+		if ($('#Level3_food_B').css("display")=="none"&&$('#Level3_food_A').css("display")=="none") {
+			$('#Level3_energybar').css('background','url(./css/img/Level3_energybar/Level3_energybar_1.png)');
+		}
+	}
+	if (x>=440&&x<=460&&y>=20&&y<=30&&$('#Level3_food_C').css("display")=="block") {
+		$('#Level3_food_C').hide();
+		if ($('#Level3_food_B').css("display")=="block"||$('#Level3_food_A').css("display")=="block") {
+			ini(level);
+		}else{
+			$('#Level3_energybar').css('background','url(./css/img/Level3_energybar/Level3_energybar_2.png)');
+		}
+	}
+	if (x>=720&&x<=740&&y>=20&&y<=30&&$('#Level3_food_D').css("display")=="block") {
+		$('#Level3_food_D').hide();
+		if ($('#Level3_food_C').css("display")=="block") {
+			ini(level);
+		}else{
+			$('#Level3_energybar').css('background','url(./css/img/Level3_energybar/Level3_energybar_3.png)');
+		}
+	}
+	if (x>=480&&x<=540&&y>=358&&y<=368&&$('#Level3_food_E').css("display")=="block") {
+		$('#Level3_food_E').hide();
+		if ($('#Level2_food_D').css("display")=="block") {
+			ini(level);
+		}else{
+			$('#Level3_energybar').css('background','url(./css/img/Level2_energybar/Level2_energybar_4.png)');
+			$('#teachingpage').hide();
+		    $('#opening').hide();
+		    $('#Level1_Background').hide();
+		    $('#Level2_Background').hide();
+		    $('#Level3_Background').hide();
+		    $('#gameending').show();
+		}
+	}
+	}
+	}
+	
+}
+function ini(level){//吃错食物顺序重置
+	$("#character"+level).css("bottom",20);
+	$("#character"+level).css("left",0);
+	$('#Level'+level+'_food_A').show();
+	$('#Level'+level+'_food_B').show();
+	$('#Level'+level+'_food_C').show();
+	$('#Level'+level+'_energybar').css('background','url(./css/img/Level'+level+'_energybar/Level'+level+'_energybar_0.png)');
+	if(level==3){
+		$('#Level'+level+'_food_D').show();
+		$('#Level'+level+'_food_E').show();
+	}
+	$("#Level"+level+"_Background").hide();
+	$('#deadending').show();
+	$('#gameending').hide();
+}
+$(function(){
+	var opening;
+	var teachingpage;
+	var Level1_Background;
+	var Level2_Background;
+	var Level3_Background;
+	var gameending;
+	var deadending;
+       $(document).keypress(function (e) {//游戏界面切换，监听空格键事件
+       	opening= $('#opening').css("display");
+	    teachingpage = $('#teachingpage').css("display");
+	    Level1_Background = $('#Level1_Background').css("display");
+	    Level2_Background = $('#Level2_Background').css("display");
+	    Level3_Background = $('#Level3_Background').css("display");
+	    gameending = $('#gameending').css("display");
+	    deadending = $('#deadending').css("display");
+       	if (opening=="inline" &&teachingpage=="none"&& Level1_Background=="none"&& gameending=="none"&& deadending=="none"&& Level2_Background=="none"&& Level3_Background=="none") {//开始
+       		if (e.keyCode == 32){
+                $('#teachingpage').show();
+                $('#opening').hide();
+                $('#Level1_Background').hide();
+                $('#gameending').hide();
+                $('#deadending').hide();
+         }
+       	}
+       	if (opening=="none" &&teachingpage=="inline"&& Level1_Background=="none"&& gameending=="none"&& deadending=="none"&& Level2_Background=="none"&& Level3_Background=="none") {//操作介绍
+       		if (e.keyCode == 32){
+                $('#teachingpage').hide();
+                $('#opening').hide();
+                $('#Level1_Background').show();
+                $('#gameending').hide();
+                $('#deadending').hide();
+                $('#Level2_Background').hide();
+                $('#Level3_Background').hide();
+         }
+       	}
+       	if (opening=="none" &&teachingpage=="none"&& Level1_Background=="none"&& gameending=="inline"&& deadending=="none"&& Level2_Background=="none"&& Level3_Background=="none") {//游戏结束
+       		if (e.keyCode == 32){
+                $('#teachingpage').hide();
+                $('#opening').show();
+                $('#Level1_Background').hide();
+                $('#gameending').hide();
+                $('#deadending').hide();
+                $('#Level2_Background').hide();
+                $('#Level3_Background').hide();
+         }
+       	}
+       	if (opening=="none" &&teachingpage=="none"&& Level1_Background=="none"&& gameending=="none"&& deadending=="inline"&& Level2_Background=="none"&& Level3_Background=="none") {//游戏失败
+       		if (e.keyCode == 32){
+                location.reload();
+         }
+       	}
+      })
+       var x = $("#character1").css("left").substring(0,$("#character1").css("left").length-2);//通过相对定位获取角色坐标
+       var y = $("#character1").css("bottom").substring(0,$("#character1").css("bottom").length-2);
+       var fall =setInterval(down,6);//定时器控制下落
+       setInterval(mouse,500);//定时器实现动态老鼠
+       function checkLv(){
+			if($('#Level1_Background').css("display")=="inline"||$('#Level1_Background').css("display")=="block")
+			return 1;
+			if($('#Level2_Background').css("display")=="inline"||$('#Level2_Background').css("display")=="block")
+			return 2;
+			if($('#Level3_Background').css("display")=="inline"||$('#Level3_Background').css("display")=="block")
+			return 3;
+}
+       function down(){//下落方法
+       	   var level=checkLv();
+       	   if(level==undefined){//若不在关卡界面不进行任何操作
+       	   		return;
+       	   }
+       	   var x = $("#character"+level).css("left").substring(0,$("#character"+level).css("left").length-2);
+           var y = $("#character"+level).css("bottom").substring(0,$("#character"+level).css("bottom").length-2);
+       	   if (y==20) {
+       	   	falldown(level);
+       	   }
+       	   if (level==1) {//第一关
+       	   	if (y>20&&y<493) {
+       	   		// console.log(x+','+y);
+       	   		if(x>=200&&x<=300&&y==133){//第一台阶
+       	   			falldown(level);
+       	   		}else if (x>=320&&x<=800&&y==198){//第二台阶
+       	   			falldown(level);
+       	   		}else if (x>=440&&x<=800&&y==352) {//第三台阶
+       	   			falldown(level);
+       	   		}else{
+       	   			y--;
+       	   			$("#character"+level).css("bottom",y);
+       	   			eat(level,x,y);
+       	   		}
+       	   	}
+       	   }else if (level==2) {//第二关
+       	   	if (y>20&&y<493) {
+       	   		// console.log(x+','+y);
+       	   		if(x>=0&&x<=100&&y==145){//左边柜子
+       	   			falldown(level);
+       	   		}else if (x>=160&&x<=620&&y==153){//床
+       	   			falldown(level);
+       	   		}else if (x>=700&&x<=800&&y==145) {//右边柜子
+       	   			falldown(level);
+       	   		}else{
+       	   			y--;
+       	   			$("#character"+level).css("bottom",y);
+       	   			eat(level,x,y);
+       	   		}
+       	   	}
+       	   }else if (level==3) {//第三关
+       	   	if (y>20&&y<493) {
+       	   		// console.log(x+','+y);
+       	   		if(x>=220&&x<=300&&y==136){//第一台阶
+       	   			falldown(level);
+       	   		}else if (x>=320&&x<=440&&y==246){//第二台阶	
+       	   			falldown(level);
+       	   		}else if (x>=380&&x<=560&&y==358) {//第三台阶
+       	   			falldown(level);
+       	   		}else if (x>=600&&x<=800&&y==288) {//第四台阶
+       	   			falldown(level);
+       	   		}else{
+       	   			y--;
+       	   			$("#character"+level).css("bottom",y);
+       	   			eat(level,x,y);
+       	   		}
+       	   	}
+       	   }
+       	   // console.log($("#character").css("bottom"));
+       }
+       function falldown(level){//用于跳跃后落回地面时恢复站立动画
+       	if ($("#character"+level).css('backgroundImage').substring($("#character"+level).css('backgroundImage').length-6,$("#character"+level).css('backgroundImage').length-7)=='r') {
+       			$("#character"+level).css('background','url(./css/img/character_Ax/Ax_walk_r.png) no-repeat');
+       	}else{
+       		$("#character"+level).css('background','url(./css/img/character_Ax/Ax_walk_l.png) no-repeat');
+       	}
+       }
+       function mouse(){//动态老鼠
+       	// console.log(Math.round(Math.random()*3));
+       	var random = Math.round(Math.random()*2)+1;
+       	var url = 'url(./css/img/Level1/Level1_food_C_'+random+'.png)';
+       		$('#Level1_food_C').css('background',url);
+       }
+       function Ax_run(level){//跑步动画
+       	/*0 23 44 65 86 107*/
+       	setTimeout(function(){
+       		$("#character"+level).css("background-position","23% 0%");
+       	},25);
+       	setTimeout(function(){
+       		$("#character"+level).css("background-position","44% 0%");
+       	},50);
+        setTimeout(function(){
+       		$("#character"+level).css("background-position","65% 0%");
+       	},75);
+       	setTimeout(function(){
+       		$("#character"+level).css("background-position","86% 0%");
+       	},100);
+       	setTimeout(function(){
+       		$("#character"+level).css("background-position","107% 0%");
+       	},125);
+       }
+
+       function Ax_jump(level,top,y){//跳跃动画,用背景图片来判断当前角色朝向
+       	if ($("#character"+level).css('backgroundImage').substring($("#character"+level).css('backgroundImage').length-6,$("#character"+level).css('backgroundImage').length-7)=='r') {
+       			$("#character"+level).css('background','url(./css/img/character_Ax/Ax_jump_r.png) no-repeat');
+       	}else{
+       		$("#character"+level).css('background','url(./css/img/character_Ax/Ax_jump_l.png) no-repeat');
+       	}
+       	/*0 23 44 65 86 107*/
+       	var time =setInterval(function(){
+       		y=parseInt(y)+5;
+       		$("#character"+level).css("bottom",y);
+       		if (parseInt(y)>parseInt(top)) {
+       			clearInterval(time);
+       		}
+       	},1);
+       	setTimeout(function(){
+       		$("#character"+level).css("background-position","23% 0%");
+       	},100);
+       	setTimeout(function(){
+       		$("#character"+level).css("background-position","44% 0%");
+       	},300);
+        setTimeout(function(){
+       		$("#character"+level).css("background-position","65% 0%");
+       	},500);
+       	setTimeout(function(){
+       		$("#character"+level).css("background-position","86% 0%");
+       	},700);
+       	setTimeout(function(){
+       		$("#character"+level).css("background-position","107% 0%");
+       	},900);
+       }
+document.onkeydown=function(e){//监听方向键
+	if(checkLv()==undefined){//若不在关卡界面不进行任何操作
+       	return;
+    }
+	e=window.event||e;
+	switch(e.keyCode){
+	case 37: //左键
+	control(37,checkLv());
+	break;
+	case 38: //向上键
+	control(38,checkLv());
+	break;
+	case 39: //右键
+	control(39,checkLv());
+	break;
+
+	default:
+	break;
+}
+
+function control(order,level){//控制移动
+	var x = $("#character"+level).css("left").substring(0,$("#character"+level).css("left").length-2);
+	var y = $("#character"+level).css("bottom").substring(0,$("#character"+level).css("bottom").length-2);
+	var top;
+	Ax_run(level);
+	if (x>=0&&y<=754) {//判断是否超出可移动范围
+		if (order==37&&x>0) {//不能越过左边界
+			x=parseInt(x)-20;
+			$("#character"+level).css("left",x);
+			$("#character"+level).css('background','url(./css/img/character_Ax/Ax_walk_l.png) no-repeat');
+		}
+		if (order==39&&x<780) {//不能越过右边界
+			x=parseInt(x)+20;
+			$("#character"+level).css("left",x);
+			$("#character"+level).css('background','url(./css/img/character_Ax/Ax_walk_r.png) no-repeat');
+		}
+		if (order==38) {//实现地面上跳和台阶上跳，需先判断角色是否已落地或已落在台阶上，再执行跳跃，防止空中多段跳BUG
+			if(y==20){//地面
+				top = parseInt(y)+170;
+				Ax_jump(level,top,y);
+			}else if (level==1) {//因每一关台阶位置不同，先对关卡做判断再对台阶位置做判断
+				if(x>=200&&x<=300&&y==133){//第一台阶
+					top = parseInt(y)+170;
+					Ax_jump(level,top,y);
+       	   		}else if (x>=320&&x<=800&&y==198){//第二台阶
+       	   			top = parseInt(y)+170;
+					Ax_jump(level,top,y);
+       	   		}else if (x>=440&&x<=800&&y==352) {//第三台阶
+       	   			if (parseInt(y)+170+66>=493) {//防止跳出游戏界面外，界面高493,默认跳跃高度为170，台阶高加角色自身身高=352+66
+       	   				top=parseInt(y)+75;//493-418=75
+       	   			}else{
+       	   				top=parseInt(y)+170;
+       	   			}
+					Ax_jump(level,top,y);
+       	   		}
+			}else if (level==2) {
+				if(x>=0&&x<=100&&y==145){//左边柜子
+					top = parseInt(y)+170;
+					Ax_jump(level,top,y);
+       	   		}else if (x>=160&&x<=620&&y==153){//床
+       	   			top = parseInt(y)+170;
+					Ax_jump(level,top,y);
+       	   		}else if (x>=700&&x<=800&&y==145) {//右边柜子
+       	   			top = parseInt(y)+170;
+					Ax_jump(level,top,y);
+       	   		}
+			}else if (level==3) {
+				if(x>=220&&x<=300&&y==136){//第一台阶
+					top = parseInt(y)+170;
+					Ax_jump(level,top,y);
+       	   		}else if (x>=320&&x<=440&&y==246){//第二台阶
+       	   			top = parseInt(y)+170;
+					Ax_jump(level,top,y);
+       	   		}else if (x>=380&&x<=560&&y==358) {//第三台阶
+       	   			if (parseInt(y)+170+88>=493) {//防止跳出游戏界面外，界面高493,默认跳跃高度为170,台阶高加角色自身身高=358+88
+       	   				top=parseInt(y)+45;//493-446=47
+       	   			}else{
+       	   				top=parseInt(y)+170;
+       	   			}
+					Ax_jump(level,top,y);
+       	   		}else if (x>=600&&x<=800&&y==288) {//第四台阶
+       	   			if (parseInt(y)+170+88>=493) {//防止跳出游戏界面外，界面高493,默认跳跃高度为170,台阶高加角色自身身高=288+88=376
+       	   				top=parseInt(y)+115;//493-376=117
+       	   			}else{
+       	   				top=parseInt(y)+170;
+       	   			}
+       	   			// $("#character"+level).css("bottom",y);
+					Ax_jump(level,top,y);
+       	   		}
+			}
+		}
+       	   	}
+       	   	eat(level,x,y);
+}
+
+function checkLv(){
+	if($('#Level1_Background').css("display")=="inline"||$('#Level1_Background').css("display")=="block")
+		return 1;
+	if($('#Level2_Background').css("display")=="inline"||$('#Level2_Background').css("display")=="block")
+		return 2;
+	if($('#Level3_Background').css("display")=="block")
+		return 3;
+}
+}
+  });
+</script>
